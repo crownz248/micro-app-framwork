@@ -12,12 +12,14 @@ apt-get install httpd nodejs
 将该仓库git clone至/var/www/html目录下（或指定的apache目录下）
 
 ```shell
+cd /var/www/html
 git clone https://github.com/crownz248/micro-app-framwork.git
 ```
 
 安装nodejs依赖
 
 ```shell
+cd micro-app-framwork
 npm install
 ```
 
