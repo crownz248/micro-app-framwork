@@ -1,58 +1,56 @@
-
-let List = require('list.js');
+// 动态加载grade组件
 let Grade = require('grade.js');
 
 module.exports = class App extends Component {
     setup(props){
         this.state = {
+            // table的数据，初始只有一条数据
             tableData: [{name:"cgz",grade:"高三",no:"1950638",chinese:110, math:140, english:135}],
+            // 是否展示成绩单
             showGrade: false,
         }
-        this.updataTable = function() {
-            this.state.tableData = [
-                ...this.state.tableData,
-                {name:"abc", no:"1234567"}
-            ]
-            console.log(this.state)
-        }
-        this.getSelect = function() {
-            console.log("select value:", this.ref.select.value)
-        }
+        // 添加新数据
         this.handleAdd = function() {
             console.log(this.ref)
             this.state.tableData = [
                 ...this.state.tableData,
                 {
+                    // 通过ref获取输入数据
                     name:this.ref.name.value, 
                     grade:this.ref.grade.value,
                     no:this.ref.no.value,
+                    // 成绩为Number
                     chinese:this.ref.chinese.value==''?0:parseInt(this.ref.chinese.value),
                     math:this.ref.math.value==''?0:parseInt(this.ref.math.value),
                     english:this.ref.english.value==''?0:parseInt(this.ref.english.value),
                 }
             ]
+            // 将input全部清空
             this.ref.name.value = '';
             this.ref.no.value = '';
             this.ref.chinese.value = '';
             this.ref.math.value = '';
             this.ref.english.value = '';
-            console.log(this.state.tableData,this.ref)
         }
+        // 删除第index行
         this.deleteRow = function(targetIndex) {
             this.state.tableData = this.state.tableData.filter((item,index)=>{
                 return targetIndex !== index;
             })
         }
+        // 第index行上移
         this.upRow = function(index) {
             if(index>0){
                 [this.state.tableData[index-1],this.state.tableData[index]] = [this.state.tableData[index],this.state.tableData[index-1]]
             }
         }
+        // 第index行下移
         this.downRow = function(index) {
             if(index<this.state.tableData.length-1){
                 [this.state.tableData[index+1],this.state.tableData[index]] = [this.state.tableData[index],this.state.tableData[index+1]]
             }
         }
+        // 是否展示成绩单，将更新showGrade属性和gradeButton的文本
         this.showGradeChange = function(){
             if(this.state.showGrade){
                 this.state.showGrade=false;
@@ -65,15 +63,9 @@ module.exports = class App extends Component {
         }
     }
 
+    // 渲染
     render() {
         return <div>
-            {/* <Vtable data={this.state.tableData}>
-                <Vcolumn label="姓名" prop="name" width="200px" style={{background:"yellow"}}></Vcolumn>
-                <Vcolumn label="学号" prop="no"></Vcolumn>
-            </Vtable>
-            <Vselect data={['1',{label:'二', value:'2'},'3']} style={{width:"100px"}} ref="select"></Vselect>
-            <List textColor={'#000'}/>
-            <button onClick={() => {this.updataTable(); this.getSelect();}}>add</button> */}
             <h3>原始成绩单</h3>
             <table>
                 <tr>
@@ -87,6 +79,7 @@ module.exports = class App extends Component {
                     <th></th>
                     <th></th>
                 </tr>
+                {/* 若tableData内没有数据，则展示‘空’ */}
                 <tr v-if="this.state.tableData.length == 0">
                     <th>空</th>
                     <th>空</th>
@@ -95,6 +88,7 @@ module.exports = class App extends Component {
                     <th>空</th>
                     <th>空</th>
                 </tr>
+                {/* 使用v-for展示tableData的数据 */}
                 <tr v-for="this.state.tableData">
                     <th>{item.name}</th>
                     <th>{item.grade}</th>
@@ -102,6 +96,7 @@ module.exports = class App extends Component {
                     <th>{item.chinese}</th>
                     <th>{item.math}</th>
                     <th>{item.english}</th>
+                    {/* 三个按钮，用于删除、向上和向下 */}
                     <th><a href="#" onClick={()=>{ this.deleteRow(index); }}>删除</a></th>
                     <th><a href="#" onClick={()=>{ this.upRow(index); }}>向上</a></th>
                     <th><a href="#" onClick={()=>{ this.downRow(index); }}>向下</a></th>
@@ -110,6 +105,7 @@ module.exports = class App extends Component {
             <h3 style={{width:"100%"}}>
                 添加成绩
             </h3>
+            {/* 输入要添加的数据 */}
             <input ref="name" style={{width:"100px"}}></input>
             <Vselect data={['高一','高二','高三']} ref="grade" style={{width:"100px"}}></Vselect>
             <input ref="no" style={{width:"100px"}}></input>
@@ -118,8 +114,10 @@ module.exports = class App extends Component {
             <input ref="english" style={{width:"100px"}}></input>
             <button onClick={() => {this.handleAdd()}}>添加</button>
             <br/>
+            {/* 是否展示成绩单 */}
             <button ref="gradeButton" onClick={() => {this.showGradeChange()}}>展示成绩单</button>
             <div v-if="this.state.showGrade">
+                {/* 调用自定义的Grade组件，数据为tableData */}
                 <Grade data={this.state.tableData}></Grade>
             </div>
         </div>

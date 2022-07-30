@@ -1,19 +1,22 @@
 module.exports = class Grade extends Component {
   render() {
-    console.log("Grade props:", this.props);
+    // console.log("Grade props:",this.props)
+    // 求单个学生的平均分和总分
     let rankData = this.props.data.map((item, index) => {
       return { ...item,
         average: ((item.chinese + item.math + item.english) / 3).toFixed(2),
         total: item.chinese + item.math + item.english
       };
-    });
+    }); // 根据总分排序
+
     rankData.sort((a, b) => {
       return b.total - a.total;
     });
     let sum = 0,
         sum1 = 0,
         sum2 = 0,
-        sum3 = 0;
+        sum3 = 0; // 求排名，并统计全班的三科总分和各科总分
+
     rankData = rankData.map((item, index) => {
       sum += item.total;
       sum1 += item.chinese;

@@ -35,24 +35,20 @@ MyModule._load = function(request){
 MyModule.prototype.load = function(filename){
   let splits = filename.split('.');
   let extname = '.'+splits[splits.length-1];
-  // console.log(filename.split('.'),extname)
   MyModule._extensions[extname](this,filename);
-
   this.loaded = true;
 
 }
 
 
 MyModule._extensions['.js'] = function(module, filename) {
-  console.log(filename)
+  // 同步ajax请求取回js文件
   let response = $.ajax({
     url: 'dist/' + filename,
     async: false,
   })
-  // console.log(response)
-  if(response.status == 200){
+  if(response.status == 200){ // 编译js文件
     let content = response.responseText;
-    // console.log(content)
     module._compile(content, filename);
   }
   
@@ -71,14 +67,8 @@ MyModule.wrap = function (script) {
 MyModule.prototype._compile = function(content, filename){
   let wrapper = MyModule.wrap(content);
 
-  // let compiledWrapper = vm.runInThisContext(wrapper, {
-  //   filename, lineOffset: 0, displayErrors: true,
-  // })
   compiledWrapper = eval(wrapper)
-  // console.log(wrapper, compiledWrapper)
   compiledWrapper(this.exports, this.require, this);
-
-  // console.log(this.exports,this.exports, this.require, this)
 
 }
 

@@ -1,5 +1,8 @@
+// 获取App
 let App = require('app.js')
+// 获取root元素
 let root = document.getElementById('root')
+// 渲染
 render(<App />, root);
 
 

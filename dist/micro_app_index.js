@@ -1,6 +1,9 @@
-let App = require('app.js');
+// ��ȡApp
+let App = require('app.js'); // ��ȡrootԪ��
 
-let root = document.getElementById('root');
+
+let root = document.getElementById('root'); // ��Ⱦ
+
 render(createElement(App, null), root); // let list =[1,2,3,4];
 // let x=<div><div v-for="list"><span>{item}</span></div></div>;
 // x=<div v-for="list"/>;

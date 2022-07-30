@@ -1,10 +1,10 @@
-let List = require('list.js');
-
+// 动态加载grade组件
 let Grade = require('grade.js');
 
 module.exports = class App extends Component {
   setup(props) {
     this.state = {
+      // table的数据，初始只有一条数据
       tableData: [{
         name: "cgz",
         grade: "高三",
@@ -13,56 +13,51 @@ module.exports = class App extends Component {
         math: 140,
         english: 135
       }],
+      // 是否展示成绩单
       showGrade: false
-    };
-
-    this.updataTable = function () {
-      this.state.tableData = [...this.state.tableData, {
-        name: "abc",
-        no: "1234567"
-      }];
-      console.log(this.state);
-    };
-
-    this.getSelect = function () {
-      console.log("select value:", this.ref.select.value);
-    };
+    }; // 添加新数据
 
     this.handleAdd = function () {
       console.log(this.ref);
       this.state.tableData = [...this.state.tableData, {
+        // 通过ref获取输入数据
         name: this.ref.name.value,
         grade: this.ref.grade.value,
         no: this.ref.no.value,
+        // 成绩为Number
         chinese: this.ref.chinese.value == '' ? 0 : parseInt(this.ref.chinese.value),
         math: this.ref.math.value == '' ? 0 : parseInt(this.ref.math.value),
         english: this.ref.english.value == '' ? 0 : parseInt(this.ref.english.value)
-      }];
+      }]; // 将input全部清空
+
       this.ref.name.value = '';
       this.ref.no.value = '';
       this.ref.chinese.value = '';
       this.ref.math.value = '';
       this.ref.english.value = '';
-      console.log(this.state.tableData, this.ref);
-    };
+    }; // 删除第index行
+
 
     this.deleteRow = function (targetIndex) {
       this.state.tableData = this.state.tableData.filter((item, index) => {
         return targetIndex !== index;
       });
-    };
+    }; // 第index行上移
+
 
     this.upRow = function (index) {
       if (index > 0) {
         [this.state.tableData[index - 1], this.state.tableData[index]] = [this.state.tableData[index], this.state.tableData[index - 1]];
       }
-    };
+    }; // 第index行下移
+
 
     this.downRow = function (index) {
       if (index < this.state.tableData.length - 1) {
         [this.state.tableData[index + 1], this.state.tableData[index]] = [this.state.tableData[index], this.state.tableData[index + 1]];
       }
-    };
+    }; // 是否展示成绩单，将更新showGrade属性和gradeButton的文本
+
 
     this.showGradeChange = function () {
       if (this.state.showGrade) {
@@ -73,7 +68,8 @@ module.exports = class App extends Component {
         this.ref.gradeButton.innerText = "关闭成绩单";
       }
     };
-  }
+  } // 渲染
+
 
   render() {
     return createElement("div", null, createElement("h3", null, "\u539F\u59CB\u6210\u7EE9\u5355"), createElement("table", null, createElement("tr", null, createElement("th", {
