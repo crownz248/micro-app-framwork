@@ -1,6 +1,6 @@
 module.exports = {
     "plugins": [
-        ["./babel_plugin.js"],
+        ["./micro_app_babel_plugin.js"],
         
     ],
     presets: [
