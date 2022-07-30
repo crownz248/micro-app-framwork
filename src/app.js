@@ -11,7 +11,7 @@ module.exports = class App extends Component {
         }
         // 添加新数据
         this.handleAdd = function() {
-            console.log(this.ref)
+            // console.log(this.ref)
             this.state.tableData = [
                 ...this.state.tableData,
                 {

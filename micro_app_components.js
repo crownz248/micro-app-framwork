@@ -24,7 +24,7 @@ class Vtable extends Component {
     return <table style={this.state.style}>
       <tr>
         {this.state.cols.map((col,index)=>{
-          console.log(col)
+          // console.log(col)
           return <th style={col.style}>
             {col.label}
           </th>
@@ -48,7 +48,7 @@ class Vcolumn extends Component {}
 
 class Vselect extends Component {
   setup(props){
-    console.log("Vselect ",props)
+    // console.log("Vselect ",props)
   }
 
   render() {

@@ -25,8 +25,8 @@ module.exports = class Grade extends Component {
       return { ...item,
         rank: index + 1
       };
-    });
-    console.log(rankData);
+    }); // console.log(rankData)
+
     return createElement("div", null, createElement("h3", null, "\u6210\u7EE9\u5355"), createElement("div", null, "\u603B\u4EBA\u6570\uFF1A", rankData.length), createElement("div", null, "\u5E73\u5747\u603B\u5206\uFF1A", (sum / rankData.length).toFixed(2), "  "), createElement("div", null, "\u8BED\u6587\u5E73\u5747\u5206\uFF1A", (sum1 / rankData.length).toFixed(2), "  \u6570\u5B66\u5E73\u5747\u5206\uFF1A", (sum2 / rankData.length).toFixed(2), "  \u82F1\u8BED\u5E73\u5747\u5206\uFF1A", (sum3 / rankData.length).toFixed(2), "  "), createElement(Vtable, {
       data: rankData,
       width: "1000px"

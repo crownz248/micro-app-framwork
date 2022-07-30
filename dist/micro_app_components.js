@@ -30,7 +30,7 @@ class Vtable extends Component {
     return createElement("table", {
       style: this.state.style
     }, createElement("tr", null, this.state.cols.map((col, index) => {
-      console.log(col);
+      // console.log(col)
       return createElement("th", {
         style: col.style
       }, col.label);
@@ -48,8 +48,7 @@ class Vtable extends Component {
 class Vcolumn extends Component {}
 
 class Vselect extends Component {
-  setup(props) {
-    console.log("Vselect ", props);
+  setup(props) {// console.log("Vselect ",props)
   }
 
   render() {

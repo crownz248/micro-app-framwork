@@ -25,7 +25,7 @@ module.exports = class Grade extends Component {
         rank: index+1,     
       }
     })
-    console.log(rankData)
+    // console.log(rankData)
     return <div>
       <h3>成绩单</h3>
       {/* 展示总人数、平均总分和各科平均分 */}

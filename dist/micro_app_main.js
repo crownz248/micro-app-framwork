@@ -43,7 +43,7 @@ const render = (vdom, parent = null) => {
 
 
 function renderComponent(vdom, parent) {
-  // 更新props和children
+  // 设置props和children
   const props = Object.assign({}, vdom.props, {
     children: vdom.children
   });
