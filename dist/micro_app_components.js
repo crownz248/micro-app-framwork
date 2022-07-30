@@ -1,3 +1,4 @@
+// �Զ������
 class Vtable extends Component {
   setup(props) {// console.log("vtable children",props.children)
   }

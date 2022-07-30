@@ -246,7 +246,7 @@ class Component {
 }
 
 // 生成worker
-let myWorker = new Worker('worker.js')
+let myWorker = new Worker('micro_app_worker.js')
 let eventMap = new Map();
 let eventCount = 0;
 

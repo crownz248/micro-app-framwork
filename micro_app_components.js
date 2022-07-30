@@ -1,4 +1,4 @@
-
+// 自定义组件
 class Vtable extends Component {
   setup(props){
     // console.log("vtable children",props.children)
