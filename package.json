@@ -1,0 +1,22 @@
+{
+  "name": "patch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel micro_app_index.js micro_app_main.js micro_app_components.js src/*.js -d ./dist",
+    "dev": "babel micro_app_index.js micro_app_main.js micro_app_components.js src/*.js -d ./dist --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.16.8",
+    "@babel/core": "^7.16.12",
+    "@babel/preset-react": "^7.16.7"
+  },
+  "dependencies": {
+    "babel-plugin-transform-remove-strict-mode": "^0.0.2"
+  }
+}
